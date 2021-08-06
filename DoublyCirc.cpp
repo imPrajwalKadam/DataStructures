@@ -24,6 +24,7 @@ public:
      }
      void InsertFirst(int);
      void InsertLast(int);
+     void DeleteFirst();
      void Display();
 };
 
@@ -68,6 +69,29 @@ void DoublyCirc :: InsertLast(int iNo)
           Tell -> next = Head;
      }
      iSize++;
+}
+
+void DoublyCirc :: DeleteFirst()
+{
+     if(iSize == 0)
+     {
+          return;
+     }
+     else if(iSize == 1)
+     {
+          delete Head;
+          Head = NULL;
+          Tell = NULL;
+     }
+     else
+     {
+          Head = Head -> next;
+          delete(Tell->next);
+          Tell->next = Head;
+          Head->prev = Tell;
+          
+     }
+     iSize--;
 }
 void DoublyCirc :: Display()
 {
@@ -114,6 +138,10 @@ main()
                cin >> iNo;
                obj.InsertLast(iNo);
                break;
+               
+               case 4:
+               obj.DeleteFirst();
+               break;
 /*
           case 3:
                cout << "Enter number\n";
@@ -123,9 +151,7 @@ main()
                obj.InsertAtPos(iNo, iPos);
                break;
 
-          case 4:
-               obj.DeleteFirst();
-               break;
+          
 
           case 5:
                obj.DeleteLast();
